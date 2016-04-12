@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Исполнители</string>
+    <string name="title_activity_artist">ArtistActivity</string>
+    <string name="no_internet">Нет соединения с интернетом</string>
+    <string name="bio">Биография</string>
+    <string name="no_data">Нет данных</string>
+    <string name="trans_name">trans_name</string>
+</resources>

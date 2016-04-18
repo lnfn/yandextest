@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -63,8 +64,24 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.Vi
     }
 
     @Override
+    public void onViewDetachedFromWindow(ViewHolder holder) {
+        super.onViewDetachedFromWindow(holder);
+
+        Animation animation = holder.itemView.getAnimation();
+        if(animation != null) {
+            animation.cancel();
+            holder.itemView.setAlpha(1f);
+        }
+    }
+
+    @Override
     public int getItemCount() {
         return this.artistList.size();
+    }
+
+    @Override
+    public boolean onFailedToRecycleView(ViewHolder holder) {
+        return true;
     }
 
     public void refreshData(List<Artist> artistList) {
@@ -76,7 +93,7 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.Vi
         viewHolder.itemView.setAlpha(0.2f);
         viewHolder.itemView.setTranslationY(-20);
         ViewCompat.animate(viewHolder.itemView)
-                .alpha(1)
+                .alpha(1f)
                 .translationY(0)
                 .setDuration(500)
                 .start();
